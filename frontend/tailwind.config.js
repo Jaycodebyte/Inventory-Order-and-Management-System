@@ -4,6 +4,12 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    // Sidebar responsive classes (used in JS expressions)
+    "translate-x-0",
+    "-translate-x-full",
+    "lg:translate-x-0",
+  ],
   theme: {
     extend: {
       colors: {

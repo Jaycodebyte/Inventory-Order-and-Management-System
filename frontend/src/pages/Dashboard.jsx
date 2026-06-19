@@ -126,19 +126,19 @@ const Dashboard = () => {
       </div>
 
       {/* Low Stock Alerts Section */}
-      <div id="low-stock" className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm scroll-mt-20">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-amber-50 rounded-lg text-amber-600 border border-amber-100">
+      <div id="low-stock" className="bg-white rounded-2xl border border-slate-100 p-4 sm:p-6 shadow-sm scroll-mt-20">
+        <div className="flex items-start justify-between gap-3 flex-wrap border-b border-slate-100 pb-4 mb-5">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="p-1.5 bg-amber-50 rounded-lg text-amber-600 border border-amber-100 shrink-0">
               <AlertTriangle className="w-5 h-5" />
             </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800">Critical Inventory Warnings</h3>
-              <p className="text-xs text-slate-400">Products with stock quantities below threshold of 10 items</p>
+            <div className="min-w-0">
+              <h3 className="text-base sm:text-lg font-bold text-slate-800">Critical Inventory Warnings</h3>
+              <p className="text-xs text-slate-400 hidden sm:block">Products with stock quantities below threshold of 10 items</p>
             </div>
           </div>
           {stats?.low_stock_count > 0 && (
-            <span className="px-2.5 py-1 bg-amber-100 text-amber-800 border border-amber-200 text-xs font-bold rounded-full">
+            <span className="px-2.5 py-1 bg-amber-100 text-amber-800 border border-amber-200 text-xs font-bold rounded-full shrink-0">
               {stats.low_stock_count} Warnings
             </span>
           )}
@@ -155,7 +155,8 @@ const Dashboard = () => {
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto -mx-4 sm:-mx-0">
+            <div className="inline-block min-w-[580px] sm:w-full align-middle px-4 sm:px-0">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-100 text-slate-400 font-semibold text-xs uppercase bg-slate-50/50">
@@ -195,6 +196,7 @@ const Dashboard = () => {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         )}
       </div>

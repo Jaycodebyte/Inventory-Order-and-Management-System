@@ -27,7 +27,7 @@ const ConfirmDialog = ({ isOpen, onClose, onConfirm, title, message, confirmText
       />
 
       {/* Dialog Card */}
-      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 max-w-md w-full z-10 p-6 transform transition-all animate-slide-in">
+      <div className="bg-white rounded-2xl shadow-xl border border-slate-100 max-w-md w-full z-10 p-4 sm:p-6 transform transition-all animate-slide-in mx-4 sm:mx-0">
         <div className="flex gap-4">
           {/* Warn Icon */}
           <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 

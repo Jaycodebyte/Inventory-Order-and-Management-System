@@ -1,11 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { User, Bell, Calendar } from 'lucide-react';
+import { User, Bell, Calendar, Menu } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
   const location = useLocation();
 
-  // Format pathname into page title
   const getPageTitle = () => {
     const path = location.pathname;
     if (path === '/') return 'Dashboard Overview';
@@ -25,14 +24,21 @@ const Navbar = () => {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0">
+    <header className="h-16 bg-white border-b border-slate-200 px-4 sm:px-6 lg:px-8 flex items-center justify-between shrink-0">
       {/* Title */}
-      <div>
-        <h2 className="text-xl font-bold text-slate-800 tracking-tight">{getPageTitle()}</h2>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onMenuClick}
+          className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition"
+          aria-label="Toggle sidebar"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+        <h2 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight">{getPageTitle()}</h2>
       </div>
 
       {/* Utilities */}
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-3 sm:gap-6">
         {/* Date Display */}
         <div className="hidden md:flex items-center gap-2 text-sm text-slate-500 bg-slate-50 px-3.5 py-1.5 rounded-lg border border-slate-200">
           <Calendar className="w-4 h-4 text-slate-400" />
@@ -48,7 +54,7 @@ const Navbar = () => {
         </div>
 
         {/* Profile Card */}
-        <div className="flex items-center gap-3 border-l border-slate-200 pl-6">
+        <div className="flex items-center gap-3 border-l border-slate-200 pl-3 sm:pl-6">
           <div className="text-right hidden sm:block">
             <p className="text-sm font-semibold text-slate-800">Administrator</p>
             <p className="text-xs text-slate-400">admin@inventorysys.com</p>

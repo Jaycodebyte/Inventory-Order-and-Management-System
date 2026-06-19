@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -13,12 +14,28 @@ from app.models import Product, Customer, Order
 
 logger = logging.getLogger(__name__)
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Run pending Alembic migrations on startup
+    try:
+        from alembic.config import Config
+        from alembic import command
+        alembic_cfg = Config("alembic.ini")
+        command.upgrade(alembic_cfg, "head")
+        logger.info("Alembic migrations applied successfully")
+    except Exception as e:
+        logger.warning("Could not run Alembic migrations on startup: %s", e)
+    yield
+
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     description="Backend API for the Inventory & Order Management System",
     version="1.0.0",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    lifespan=lifespan
 )
 
 # CORS Configuration

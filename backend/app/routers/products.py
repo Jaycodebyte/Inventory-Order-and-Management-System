@@ -118,13 +118,10 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
             detail=f"Product with ID {product_id} not found"
         )
         
-    # Check if product is referenced in order items (to prevent database foreign key violations)
-    is_ordered = db.query(OrderItem).filter(OrderItem.product_id == product_id).first()
-    if is_ordered:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Cannot delete product '{product.name}' because it has been ordered in history. Consider adjusting stock quantity instead."
-        )
+    # Nullify product references in order items to preserve order history
+    db.query(OrderItem).filter(OrderItem.product_id == product_id).update(
+        {"product_id": None}, synchronize_session=False
+    )
         
     db.delete(product)
     db.commit()

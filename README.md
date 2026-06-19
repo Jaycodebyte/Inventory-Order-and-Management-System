@@ -231,6 +231,17 @@ inventory-order-management-system/
 └── README.md
 ```
 
+## Docker Images
+
+Pre-built images are available on Docker Hub:
+
+| Image | Pull Command |
+|---|---|
+| **Backend** | `docker pull jay00000/inventory-backend:latest` |
+| **Frontend** | `docker pull jay00000/inventory-frontend:latest` |
+
+The `docker-compose.yml` references these images by default. To build locally instead, comment out the `image:` lines.
+
 ## Deployment Guide
 
 ### Frontend → Vercel
